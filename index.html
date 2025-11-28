@@ -1,154 +1,70 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Учебное мини-приложение</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <style>
-        body {
-            margin: 0;
-            background: #0f0f0f;
-            color: white;
-            font-family: "Arial";
-        }
-
-        .header {
-            padding: 20px;
-            font-size: 26px;
-            font-weight: bold;
-            background: linear-gradient(90deg, #2c3e50, #4ca1af);
-            text-align: center;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .subject {
-            background: #1c1c1c;
-            padding: 18px;
-            border-radius: 14px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            font-size: 20px;
-            border: 1px solid #333;
-            transition: 0.2s;
-        }
-        .subject:hover {
-            background: #2a2a2a;
-        }
-
-        .topic {
-            background: #222;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            border: 1px solid #333;
-        }
-
-        .card {
-            background: #1b1b1b;
-            padding: 18px;
-            border-radius: 14px;
-        }
-
-        .card img {
-            width: 100%;
-            border-radius: 14px;
-            margin-bottom: 12px;
-        }
-
-        .back-btn {
-            background: #333;
-            padding: 12px 16px;
-            border-radius: 12px;
-            width: fit-content;
-            margin-bottom: 16px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Учебное приложение</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body { 
+    font-family: Arial, sans-serif; 
+    background: #1e1e2f; 
+    color: #ffffff; 
+    padding: 20px; 
+}
+h1 { 
+    text-align: center; 
+    color: #00d4ff; 
+}
+.subjects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+.subject {
+    background: #2e2e4f;
+    border-radius: 12px;
+    padding: 20px;
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+.subject:hover {
+    transform: scale(1.05);
+    background: #3e3e6f;
+}
+.subject img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+</style>
 </head>
 <body>
-
-<div class="header">📚 Учебное приложение</div>
-
-<div class="container" id="app"></div>
-
-<script>
-    const data = {
-        "Математика": {
-            "Интеграл": {
-                img: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Integral_example.png",
-                text: "Интеграл — это площадь под графиком функции. Используется в физике, экономике и инженерии."
-            },
-            "Производная": {
-                img: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Tangent_function.png",
-                text: "Производная показывает скорость изменения функции."
-            }
-        },
-
-        "Биология": {
-            "Пестик": {
-                img: "https://upload.wikimedia.org/wikipedia/commons/8/84/Diagram_of_flower_structure_ru.svg",
-                text: "Пестик — женская часть цветка. Состоит из рыльца, столбика и завязи."
-            },
-            "Тычинка": {
-                img: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Stamen_en.svg",
-                text: "Тычинка — мужской орган цветка, состоящий из нити и пыльника."
-            }
-        },
-
-        "Информатика": {
-            "Алгоритм": {
-                img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Flowchart_example.svg",
-                text: "Алгоритм — последовательность действий для решения задачи."
-            }
-        }
-    };
-
-    const app = document.getElementById("app");
-
-    function showSubjects() {
-        app.innerHTML = "";
-        for (let subject in data) {
-            const block = document.createElement("div");
-            block.className = "subject";
-            block.innerText = subject;
-            block.onclick = () => showTopics(subject);
-            app.append(block);
-        }
-    }
-
-    function showTopics(subject) {
-        app.innerHTML = `
-            <div class="back-btn" onclick="showSubjects()">← Назад</div>
-            <h2>${subject}</h2>
-        `;
-        for (let topic in data[subject]) {
-            const div = document.createElement("div");
-            div.className = "topic";
-            div.innerText = topic;
-            div.onclick = () => showCard(subject, topic);
-            app.append(div);
-        }
-    }
-
-    function showCard(subject, topic) {
-        const item = data[subject][topic];
-        app.innerHTML = `
-            <div class="back-btn" onclick="showTopics('${subject}')">← Назад</div>
-            <div class="card">
-                <img src="${item.img}">
-                <h2>${topic}</h2>
-                <p>${item.text}</p>
-            </div>
-        `;
-    }
-
-    showSubjects();
-</script>
-
+<h1>📚 Учебное приложение</h1>
+<div class="subjects">
+    <div class="subject" onclick="alert('Математика: интегралы, алгебра, геометрия')">
+        <img src="https://img.icons8.com/color/96/math.png" alt="Математика"/>
+        Математика
+    </div>
+    <div class="subject" onclick="alert('Биология: клетки, органы, экология')">
+        <img src="https://img.icons8.com/color/96/biology.png" alt="Биология"/>
+        Биология
+    </div>
+    <div class="subject" onclick="alert('Информатика: алгоритмы, кодирование')">
+        <img src="https://img.icons8.com/color/96/computer.png" alt="Информатика"/>
+        Информатика
+    </div>
+    <div class="subject" onclick="alert('Химия: атомы, реакции, вещества')">
+        <img src="https://img.icons8.com/color/96/chemistry.png" alt="Химия"/>
+        Химия
+    </div>
+    <div class="subject" onclick="alert('Физика: законы движения, энергия, свет')">
+        <img src="https://img.icons8.com/color/96/physics.png" alt="Физика"/>
+        Физика
+    </div>
+</div>
 </body>
 </html>
